@@ -1,8 +1,13 @@
 # 3 Levels Of Calculator Homework
 
-For this homework. what you need to do is to try to make the most complete calculator that can add, subtract, multiply, divide and store a history of calulations.  The purpose of this assignment is to introduce you understand the principles of object oriented programming, unit testing, and design principles such as SOLID, DRY, and Seperation of concerns.  Its important to understand how to properly organize your code using the professional "grammer" of programming and not just the syntax of if statements and loops.
+For this homework. what you need to do is to try to make the most complete calculator that can add, subtract, multiply, divide and store a history of calulations.  The purpose of this assignment is to introduce you understand the principles of object oriented programming, unit testing, and design principles such as SOLID, DRY, GRASP, and Seperation of concerns.  Its important to understand how to properly organize your code using the professional "grammer" of programming and not just the syntax of if statements and loops.
 
-**NOTE: YOU NEED TO CHECKOUT BRANCH "PART2" TO SEE THE DETAILED CODE COMMENTS
+## Submission Instructions
+1.  Make a new repo from scratch and set it up like last time, so you can run pytest, pylint, and coverage.  You could even start with a copy of your last repo.
+
+2.  Submit a link to your repository to Canvas when your finished.
+
+**NOTE: YOU NEED TO CHECKOUT BRANCH "PART2" TO SEE THE DETAILED CODE COMMENTS**
 
 Basic tips:
 * Don't repeat yourslf #1 rule
@@ -15,7 +20,7 @@ In this repository, you can see that there are 3 branches:
 
 1.  Main - Basic Calculator with functions
 2.  Part 2 - Intermediate Calculator with static methods on Calculator class and instance methods on Calculation class to perform operations on the data in the calculation instance.
-3.  Part 3 - Advanced Calculator 
+3.  Part 3 - Advanced Calculator **Has the detailed comments to read**
 
 ## Instructor Video and Required Readings
 
