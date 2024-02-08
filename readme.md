@@ -15,7 +15,7 @@ For this homework. what you need to do is to try to make the most complete calcu
 4.  Activate the virtual environment
 5.  Install the requirements with pip or pip3 install requirements.txt
 
-**NOTE: YOU NEED TO CHECKOUT BRANCH "PART2" TO SEE THE DETAILED CODE COMMENTS**
+**NOTE: YOU NEED TO CHECKOUT BRANCH "PART3" TO SEE THE DETAILED CODE COMMENTS**
 
 Basic tips:
 * Don't repeat yourslf #1 rule
