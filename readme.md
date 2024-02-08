@@ -7,6 +7,14 @@ For this homework. what you need to do is to try to make the most complete calcu
 
 2.  Submit a link to your repository to Canvas when your finished.
 
+## To get my code to run / Install Instructions
+
+1.  Clone the repo
+2.  CD into the repo directory
+3.  Create the virtual environment
+4.  Activate the virtual environment
+5.  Install the requirements with pip or pip3 install requirements.txt
+
 **NOTE: YOU NEED TO CHECKOUT BRANCH "PART2" TO SEE THE DETAILED CODE COMMENTS**
 
 Basic tips:
