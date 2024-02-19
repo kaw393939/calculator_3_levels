@@ -20,40 +20,45 @@ This code demonstrates effective use of object-oriented and functional programmi
 '''
 
 # Import necessary modules and classes
+from decimal import Decimal  # For high-precision arithmetic
+from typing import Callable  # For type hinting callable objects
 from calculator.calculations import Calculations  # Manages history of calculations
 from calculator.operations import add, subtract, multiply, divide  # Arithmetic operations
 from calculator.calculation import Calculation  # Represents a single calculation
-from decimal import Decimal  # For high-precision arithmetic
-from typing import Callable  # For type hinting callable objects
 
 # Definition of the Calculator class
 class Calculator:
+    '''Calculator class'''
     @staticmethod
-    def _perform_operation(a: Decimal, b: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+    def _perform_operation(num1: Decimal, num2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
         """Create and perform a calculation, then return the result."""
         # Create a Calculation object using the static create method, passing in operands and the operation
-        calculation = Calculation.create(a, b, operation)
+        calculation = Calculation.create(num1, num2, operation)
         # Add the calculation to the history managed by the Calculations class
         Calculations.add_calculation(calculation)
         # Perform the calculation and return the result
         return calculation.perform()
 
     @staticmethod
-    def add(a: Decimal, b: Decimal) -> Decimal:
+    def add(num1: Decimal, num2: Decimal) -> Decimal:
+        '''Addition function'''
         # Perform addition by delegating to the _perform_operation method with the add operation
-        return Calculator._perform_operation(a, b, add)
+        return Calculator._perform_operation(num1, num2, add)
 
     @staticmethod
-    def subtract(a: Decimal, b: Decimal) -> Decimal:
+    def subtract(num1: Decimal, num2: Decimal) -> Decimal:
+        '''Subtraction function'''
         # Perform subtraction by delegating to the _perform_operation method with the subtract operation
-        return Calculator._perform_operation(a, b, subtract)
+        return Calculator._perform_operation(num1, num2, subtract)
 
     @staticmethod
-    def multiply(a: Decimal, b: Decimal) -> Decimal:
+    def multiply(num1: Decimal, num2: Decimal) -> Decimal:
+        '''Multiplication function'''
         # Perform multiplication by delegating to the _perform_operation method with the multiply operation
-        return Calculator._perform_operation(a, b, multiply)
+        return Calculator._perform_operation(num1, num2, multiply)
 
     @staticmethod
-    def divide(a: Decimal, b: Decimal) -> Decimal:
+    def divide(num1: Decimal, num2: Decimal) -> Decimal:
+        '''Division function'''
         # Perform division by delegating to the _perform_operation method with the divide operation
-        return Calculator._perform_operation(a, b, divide)
+        return Calculator._perform_operation(num1, num2, divide)

@@ -1,9 +1,11 @@
-from decimal import Decimal
-from typing import Callable, List
+'''Calcuations module'''
+
+from typing import List
 
 from calculator.calculation import Calculation
 
 class Calculations:
+    '''Calculations class'''
     history: List[Calculation] = []
 
     @classmethod
