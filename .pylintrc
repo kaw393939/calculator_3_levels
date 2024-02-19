@@ -10,6 +10,7 @@ disable= unused-argument,
          line-too-long,
          redefined-outer-name,
          unrecognized-option,
+         broad-exception-caught
 
 [REPORTS]
 # Set the output format. Available formats: text, parseable, colorized, json, msvs (visual studio) and html
