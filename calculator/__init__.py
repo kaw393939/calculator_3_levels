@@ -1,64 +1,91 @@
-'''
+'''This page is refactored to have commands to perform the 4 operations'''
+from abc import ABC, abstractmethod
 
-This Python code defines a Calculator class that provides a simple interface for performing arithmetic operations (addition, subtraction, multiplication, division) on Decimal numbers. The class uses static methods, demonstrating a functional approach within an object-oriented context. 
-Each operation method creates a Calculation object, performs the calculation, adds it to a history of calculations, and then returns the result. 
-Let's break down the code with detailed comments and highlight its design principles.
+# Command Interface
+class Command(ABC):
+    '''command interface'''
+    @abstractmethod
+    def execute(self):
+        '''method to represent action being performed'''
 
-Design Principles Illustrated
-Single Responsibility Principle (SRP): The Calculator class is focused solely on performing calculations using the provided operations. It delegates the responsibility of managing calculation history to the Calculations class, adhering to SRP by having a single reason to change.
+# Add Command
+class AddCommand(Command):
+    '''command for addition'''
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
 
-Don't Repeat Yourself (DRY): The _perform_operation method abstracts the common process of creating a calculation, adding it to the history, and returning the result. This reduces repetition in the operation methods (add, subtract, multiply, divide), each of which only specifies the operation to perform.
+    def execute(self):
+        return self.num1 + self.num2
 
-Separation of Concerns: The Calculator class separates concerns by handling the calculation logic, while the Calculations class manages the history of calculations. This separation ensures that each class has a distinct responsibility, enhancing maintainability and scalability.
+# Subtract Command
+class SubtractCommand(Command):
+    '''command for subtract'''
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
 
-Encapsulation: While not encapsulating in the traditional sense of hiding data within an object, the Calculator class encapsulates the behavior of performing calculations and managing their lifecycle, showcasing functional encapsulation.
+    def execute(self):
+        return self.num1 - self.num2
 
-Polymorphism: The use of a Callable type hint for the operation parameter in _perform_operation method demonstrates polymorphism. It allows for any function that matches the specified signature to be passed in and executed, showcasing flexibility and reuse.
+# Multiply Command
+class MultiplyCommand(Command):
+    '''command for multiplication'''
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
 
-This code demonstrates effective use of object-oriented and functional programming principles to create a modular, maintainable, and easy-to-use calculator interface.
+    def execute(self):
+        return self.num1 * self.num2
 
-'''
+# Divide Command
+class DivideCommand(Command):
+    '''command for division'''
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
 
-# Import necessary modules and classes
-from decimal import Decimal  # For high-precision arithmetic
-from typing import Callable  # For type hinting callable objects
-from calculator.calculations import Calculations  # Manages history of calculations
-from calculator.operations import add, subtract, multiply, divide  # Arithmetic operations
-from calculator.calculation import Calculation  # Represents a single calculation
+    def execute(self):
+        if self.num2 == 0:
+            return "Error: Division by zero"
+        else:
+            return self.num1 / self.num2
 
-# Definition of the Calculator class
+# Calculator
 class Calculator:
-    '''Calculator class'''
-    @staticmethod
-    def _perform_operation(num1: Decimal, num2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
-        """Create and perform a calculation, then return the result."""
-        # Create a Calculation object using the static create method, passing in operands and the operation
-        calculation = Calculation.create(num1, num2, operation)
-        # Add the calculation to the history managed by the Calculations class
-        Calculations.add_calculation(calculation)
-        # Perform the calculation and return the result
-        return calculation.perform()
+    '''calculator class'''
+    def run(self):
+        '''to execute'''
+        while True:
+            print("Available commands: add, subtract, multiply, divide, exit")
+            command = input("Enter command: ").strip().lower()
+            if command == "exit":
+                print("Exiting...")
+                break
 
-    @staticmethod
-    def add(num1: Decimal, num2: Decimal) -> Decimal:
-        '''Addition function'''
-        # Perform addition by delegating to the _perform_operation method with the add operation
-        return Calculator._perform_operation(num1, num2, add)
+            if command not in ["add", "subtract", "multiply", "divide"]:
+                print("Invalid command.")
+                continue
 
-    @staticmethod
-    def subtract(num1: Decimal, num2: Decimal) -> Decimal:
-        '''Subtraction function'''
-        # Perform subtraction by delegating to the _perform_operation method with the subtract operation
-        return Calculator._perform_operation(num1, num2, subtract)
+            try:
+                x = float(input("Enter first number: "))
+                y = float(input("Enter second number: "))
+            except ValueError:
+                print("Invalid input. Please enter valid numbers.")
+                continue
 
-    @staticmethod
-    def multiply(num1: Decimal, num2: Decimal) -> Decimal:
-        '''Multiplication function'''
-        # Perform multiplication by delegating to the _perform_operation method with the multiply operation
-        return Calculator._perform_operation(num1, num2, multiply)
+            if command == "add":
+                result = AddCommand(x, y).execute()
+            elif command == "subtract":
+                result = SubtractCommand(x, y).execute()
+            elif command == "multiply":
+                result = MultiplyCommand(x, y).execute()
+            elif command == "divide":
+                result = DivideCommand(x, y).execute()
 
-    @staticmethod
-    def divide(num1: Decimal, num2: Decimal) -> Decimal:
-        '''Division function'''
-        # Perform division by delegating to the _perform_operation method with the divide operation
-        return Calculator._perform_operation(num1, num2, divide)
+            print("Result:", result)
+
+# Main
+if __name__ == "__main__":
+    calculator = Calculator()
+    calculator.run()
