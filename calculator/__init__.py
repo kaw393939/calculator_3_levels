@@ -48,41 +48,61 @@ class DivideCommand(Command):
     def execute(self):
         if self.num2 == 0:
             return "Error: Division by zero"
-        else:
-            return self.num1 / self.num2
+        return self.num1 / self.num2
+
+# Menu Command
+class MenuCommand(Command):
+    '''menu'''
+    def __init__(self, command_dict):
+        self.command_dict = command_dict
+
+    def execute(self):
+        print("Available commands:")
+        for command_name in self.command_dict:
+            print(command_name)
 
 # Calculator
 class Calculator:
     '''calculator class'''
+    def __init__(self):
+        self.commands = {
+            "add": AddCommand,
+            "subtract": SubtractCommand,
+            "multiply": MultiplyCommand,
+            "divide": DivideCommand,
+            "menu": MenuCommand
+        }
+
     def run(self):
-        '''to execute'''
+        '''executing calculator commands'''
         while True:
-            print("Available commands: add, subtract, multiply, divide, exit")
-            command = input("Enter command: ").strip().lower()
-            if command == "exit":
-                print("Exiting...")
+            print("Available commands: add, subtract, multiply, divide, menu, exit")
+            user_input = input("Enter command and numbers in the following format (add 5 3): ").strip().lower()
+
+            if user_input == "exit":
+                print("Exiting")
                 break
 
-            if command not in ["add", "subtract", "multiply", "divide"]:
+            command_parts = user_input.split()
+            command_name = command_parts[0]
+
+            if command_name not in self.commands:
                 print("Invalid command.")
                 continue
 
+            if command_name == "menu":
+                MenuCommand(self.commands).execute()
+                continue
+
             try:
-                x = float(input("Enter first number: "))
-                y = float(input("Enter second number: "))
-            except ValueError:
+                x = float(command_parts[1])
+                y = float(command_parts[2])
+            except (ValueError, IndexError):
                 print("Invalid input. Please enter valid numbers.")
                 continue
 
-            if command == "add":
-                result = AddCommand(x, y).execute()
-            elif command == "subtract":
-                result = SubtractCommand(x, y).execute()
-            elif command == "multiply":
-                result = MultiplyCommand(x, y).execute()
-            elif command == "divide":
-                result = DivideCommand(x, y).execute()
-
+            command = self.commands[command_name](x, y)
+            result = command.execute()
             print("Result:", result)
 
 # Main
